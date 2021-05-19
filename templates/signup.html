@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<h4>Sign up</h4>
+<form action="" method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+    <p>
+        {{ field|as_crispy_field }}
+        {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+        {% endfor %}
+    </p>
+    {% endfor %}
+    <button type="submit">Sign up >></button>
+</form>
+
+{% endblock %}

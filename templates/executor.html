@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<form class="row g-3" action="" method="POST">{% csrf_token %}
+    <div class="col-md-3">
+        {{ form.tester | as_crispy_field }}
+    </div>
+
+    <div class="col-md-4">
+        {{ form.file | as_crispy_field }}
+    </div>
+
+    <div class="col-md-3">
+        {{ form.environment_id | as_crispy_field }}
+    </div>
+
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary">Execute >></button>
+    </div>
+</form>
+<br>
+<hr class="mt-0 mb-4">
+
+
+{% endblock %}
+

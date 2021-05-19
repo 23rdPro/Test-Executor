@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="col-6">
+    <h4 class="mt-2">Test Results</h4>
+</div>
+
+<table class="table" id="itemTable">
+    <thead>
+    <tr>
+        <th scope="col" class="table-primary">ID</th>
+        <th scope="col" class="table-primary">User</th>
+        <th scope="col" class="table-primary">Date Created</th>
+        <th scope="col" class="table-primary">Test Env</th>
+        <th scope="col" class="table-primary">Test File(s)</th>
+        <th scope="col" class="table-primary">Test Log</th>
+        <th scope="col" class="table-primary">Test Status</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for executor in executors %}
+        {% if executor.test_status == 'PASSED' %}
+            <tr>
+                <th scope="row" class="table-success">{{ executor.id }}</th>
+                <td class="table-success">{{ executor.tester }}</td>
+                <td class="table-success">{{ executor.created_at|date:"Y-m-j h:i:sO" }}</td>
+                <td class="table-success">{{ executor.environment_id }}</td>
+                <td class="table-success">{{ executor }}</td>
+                <td class="table-success">{{ executor.test_log }}</td>
+                <td class="table-success">{{ executor.test_status }}</td>
+            </tr>
+        {% elif executor.test_status == 'FAILED' %}
+            <tr>
+                <th scope="row" class="table-danger">{{ executor.id }}</th>
+                <td class="table-danger">{{ executor.tester }}</td>
+                <td class="table-danger">{{ executor.created_at|date:"Y-m-j h:i:sO" }}</td>
+                <td class="table-danger">{{ executor.environment_id }}</td>
+                <td class="table-danger">{{ executor }}</td>
+                <td class="table-danger">{{ executor.test_log }}</td>
+                <td class="table-danger">{{ executor.test_status }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <th scope="row" class="table-warning">{{ executor.id }}</th>
+                <td class="table-warning">{{ executor.tester }}</td>
+                <td class="table-warning">{{ executor.created_at|date:"Y-m-j h:i:sO" }}</td>
+                <td class="table-warning">{{ executor.environment_id }}</td>
+                <td class="table-warning">{{ executor }}</td>
+                <td class="table-warning">PENDING...</td>
+                <td class="table-warning">PENDING...</td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+
+{% block script %}
+    <script src='{% static "js/poll.js" %}'></script>
+{% endblock %}

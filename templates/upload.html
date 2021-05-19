@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form class="row g-3" action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+    <div class="col-md-3">
+        {{ form.file | as_crispy_field }}
+        <button type="submit" class="btn btn-primary">Upload >></button>
+    </div>
+</form>
+<br>
+<hr class="mt-0 mb-4">
+{% endblock %}
